@@ -213,61 +213,60 @@ export default function Blog() {
             </Link>
           )}
 
-          {/* ── GRID: dcrayons card style — rounded image + floating info box ── */}
+          {/* ── GRID: Horizontal card — image LEFT, detail RIGHT ── */}
           {gridPosts.length > 0 && (
             <>
-              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '28px' }}>
+              <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '24px' }}>
                 Latest Articles
               </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '32px' }} className="blog-grid">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '20px' }} className="blog-grid">
                 {gridPosts.map(post => (
-                  <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', paddingBottom: '20px', textAlign: 'left' }}>
-                    <div style={{ position: 'relative', cursor: 'pointer', textAlign: 'left' }}
-                      onMouseEnter={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06)' }}
-                      onMouseLeave={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)' }}>
+                  <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
+                    <div style={{
+                      display: 'flex', flexDirection: 'row', borderRadius: '18px', overflow: 'hidden',
+                      background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.07)', border: '1px solid #F1F5F9',
+                      transition: 'transform 0.22s, box-shadow 0.22s', height: '160px',
+                    }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 36px rgba(0,0,0,0.11)' }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.07)' }}>
 
-                      {/* ── ROUNDED IMAGE ── */}
-                      <div style={{ borderRadius: '18px', height: '210px', background: post.imgBg, overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-                        {/* decorative circles */}
-                        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '130px', height: '130px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)' }} />
-                        <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '90px', height: '90px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
-                        {/* icon */}
-                        <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(255,255,255,0.18)', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
-                          <post.Icon size={26} color="#fff" />
+                      {/* ── LEFT: Image rectangle (bada) ── */}
+                      <div style={{
+                        width: '140px', flexShrink: 0,
+                        background: post.imgBg,
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                        gap: '10px', position: 'relative', overflow: 'hidden',
+                      }}>
+                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)' }} />
+                        <div style={{ position: 'absolute', bottom: '-15px', left: '-15px', width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
+                        <div style={{ width: '48px', height: '48px', borderRadius: '13px', background: 'rgba(255,255,255,0.18)', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
+                          <post.Icon size={22} color="#fff" />
                         </div>
-                        {/* category badge on image */}
-                        <span style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '4px 14px', borderRadius: '100px', zIndex: 1, letterSpacing: '0.05em' }}>
+                        <span style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff', fontSize: '10px', fontWeight: 700, padding: '3px 10px', borderRadius: '100px', zIndex: 1, letterSpacing: '0.04em' }}>
                           {post.category}
                         </span>
                       </div>
 
-                      {/* ── FLOATING INFO BOX ── */}
-                      <div className="card-info" style={{
-                        background: '#fff',
-                        borderRadius: '14px',
-                        padding: '18px 20px 16px',
-                        margin: '0 14px',
-                        marginTop: '-32px',
-                        position: 'relative',
-                        zIndex: 2,
-                        boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
-                        transition: 'box-shadow 0.25s',
-                        textAlign: 'left',
+                      {/* ── RIGHT: Detail rectangle (chota, left-aligned) ── */}
+                      <div style={{
+                        flex: 1, padding: '16px 18px', display: 'flex', flexDirection: 'column',
+                        justifyContent: 'space-between', textAlign: 'left', overflow: 'hidden',
                       }}>
                         {/* title */}
-                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.5, marginBottom: '8px', textAlign: 'left' }}>
+                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0F172A', lineHeight: 1.45, textAlign: 'left', margin: 0,
+                          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                        }}>
                           {post.title}
                         </h3>
-                        {/* excerpt — 3.5 lines via line-clamp */}
-                        <p style={{
-                          fontSize: '13px', color: '#64748B', lineHeight: 1.65, marginBottom: '14px', textAlign: 'left',
-                          display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                        {/* excerpt */}
+                        <p style={{ fontSize: '12px', color: '#64748B', lineHeight: 1.6, textAlign: 'left', margin: '8px 0 0',
+                          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1,
                         }}>
                           {post.excerpt}
                         </p>
                         {/* read more */}
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '13px', fontWeight: 700, color: '#F97316' }}>
-                          Read More <ArrowRight size={13} />
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: 700, color: '#F97316', marginTop: '10px', textAlign: 'left' }}>
+                          Read More <ArrowRight size={12} />
                         </span>
                       </div>
 
