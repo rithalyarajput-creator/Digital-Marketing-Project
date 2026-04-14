@@ -223,7 +223,7 @@ export default function Blog() {
                 {gridPosts.map(post => (
                   <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
                     <div style={{
-                      display: 'flex', flexDirection: 'row', borderRadius: '18px', overflow: 'hidden',
+                      display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', borderRadius: '18px', overflow: 'hidden',
                       background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.07)', border: '1px solid #F1F5F9',
                       transition: 'transform 0.22s, box-shadow 0.22s', height: '160px',
                     }}
@@ -232,7 +232,7 @@ export default function Blog() {
 
                       {/* ── LEFT: Image rectangle (bada) ── */}
                       <div style={{
-                        width: '140px', flexShrink: 0,
+                        width: '140px', minWidth: '140px', flexShrink: 0,
                         background: post.imgBg,
                         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                         gap: '10px', position: 'relative', overflow: 'hidden',
@@ -249,7 +249,7 @@ export default function Blog() {
 
                       {/* ── RIGHT: Detail rectangle (chota, left-aligned) ── */}
                       <div style={{
-                        flex: 1, padding: '16px 18px', display: 'flex', flexDirection: 'column',
+                        flex: 1, minWidth: 0, padding: '16px 18px', display: 'flex', flexDirection: 'column',
                         justifyContent: 'space-between', textAlign: 'left', overflow: 'hidden',
                       }}>
                         {/* title */}
