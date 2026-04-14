@@ -213,61 +213,63 @@ export default function Blog() {
             </Link>
           )}
 
-          {/* ── GRID: Horizontal card — image LEFT, detail RIGHT ── */}
+          {/* ── GRID: Vertical card — image TOP, info box BOTTOM ── */}
           {gridPosts.length > 0 && (
             <>
               <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '24px' }}>
                 Latest Articles
               </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '20px' }} className="blog-grid">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '24px' }} className="blog-grid">
                 {gridPosts.map(post => (
                   <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block' }}>
                     <div style={{
-                      display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', borderRadius: '18px', overflow: 'hidden',
-                      background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.07)', border: '1px solid #F1F5F9',
-                      transition: 'transform 0.22s, box-shadow 0.22s', height: '160px',
+                      borderRadius: '20px', overflow: 'hidden', background: '#fff',
+                      boxShadow: '0 6px 28px rgba(0,0,0,0.08)', border: '1px solid #F1F5F9',
+                      transition: 'transform 0.22s, box-shadow 0.22s',
                     }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 36px rgba(0,0,0,0.11)' }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.07)' }}>
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-5px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 48px rgba(0,0,0,0.13)' }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 28px rgba(0,0,0,0.08)' }}>
 
-                      {/* ── LEFT: Image rectangle (bada) ── */}
+                      {/* ── TOP: Image / Visual area ── */}
                       <div style={{
-                        width: '140px', minWidth: '140px', flexShrink: 0,
-                        background: post.imgBg,
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                        gap: '10px', position: 'relative', overflow: 'hidden',
+                        height: '180px', background: post.imgBg, position: 'relative', overflow: 'hidden',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                       }}>
-                        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)' }} />
-                        <div style={{ position: 'absolute', bottom: '-15px', left: '-15px', width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
-                        <div style={{ width: '48px', height: '48px', borderRadius: '13px', background: 'rgba(255,255,255,0.18)', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1 }}>
-                          <post.Icon size={22} color="#fff" />
+                        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)' }} />
+                        <div style={{ position: 'absolute', bottom: '-30px', left: '-30px', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(0,0,0,0.1)' }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', zIndex: 1 }}>
+                          <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: 'rgba(255,255,255,0.18)', border: '1.5px solid rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <post.Icon size={28} color="#fff" />
+                          </div>
+                          <span style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', fontSize: '11px', fontWeight: 700, padding: '4px 14px', borderRadius: '100px', letterSpacing: '0.04em' }}>
+                            {post.category}
+                          </span>
                         </div>
-                        <span style={{ background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.25)', color: '#fff', fontSize: '10px', fontWeight: 700, padding: '3px 10px', borderRadius: '100px', zIndex: 1, letterSpacing: '0.04em' }}>
-                          {post.category}
-                        </span>
                       </div>
 
-                      {/* ── RIGHT: Detail rectangle (chota, left-aligned) ── */}
-                      <div style={{
-                        flex: 1, minWidth: 0, padding: '16px 18px', display: 'flex', flexDirection: 'column',
-                        justifyContent: 'space-between', textAlign: 'left', overflow: 'hidden',
-                      }}>
-                        {/* title */}
-                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#0F172A', lineHeight: 1.45, textAlign: 'left', margin: 0,
+                      {/* ── BOTTOM: Info box ── */}
+                      <div style={{ padding: '20px 22px 22px', background: '#fff' }}>
+                        <h3 style={{
+                          fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.45,
+                          marginBottom: '10px', margin: '0 0 10px',
                           display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                         }}>
                           {post.title}
                         </h3>
-                        {/* excerpt */}
-                        <p style={{ fontSize: '12px', color: '#64748B', lineHeight: 1.6, textAlign: 'left', margin: '8px 0 0',
-                          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1,
+                        <p style={{
+                          fontSize: '13px', color: '#64748B', lineHeight: 1.65, margin: '0 0 16px',
+                          display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                         }}>
                           {post.excerpt}
                         </p>
-                        {/* read more */}
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '12px', fontWeight: 700, color: '#F97316', marginTop: '10px', textAlign: 'left' }}>
-                          Read More <ArrowRight size={12} />
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span style={{ fontSize: '12px', color: '#94A3B8', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <Clock size={11} /> {post.readTime} read
+                          </span>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '13px', fontWeight: 700, color: '#F97316' }}>
+                            Read More <ArrowRight size={13} />
+                          </span>
+                        </div>
                       </div>
 
                     </div>
@@ -311,8 +313,8 @@ export default function Blog() {
       </section>
 
       <style>{`
-        @media(max-width:960px){.blog-grid{grid-template-columns:repeat(2,1fr)!important;}}
-        @media(max-width:580px){.blog-grid{grid-template-columns:1fr!important;}}
+        @media(max-width:1100px){.blog-grid{grid-template-columns:repeat(2,1fr)!important;}}
+        @media(max-width:600px){.blog-grid{grid-template-columns:1fr!important;}}
         @media(max-width:780px){.featured-card{grid-template-columns:1fr!important;}}
         @media(max-width:780px){.featured-card>div:last-child{min-height:220px!important;}}
         .card-info, .card-info *{text-align:left!important;}
