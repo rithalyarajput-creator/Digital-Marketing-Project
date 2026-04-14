@@ -1,20 +1,19 @@
 export default function MarqueeSection() {
   const items = [
-    "SEO Optimization", "Social Media Marketing", "Google Ads",
-    "Content Strategy", "Web Design", "Email Marketing",
-    "Brand Identity", "Analytics & Reporting", "PPC Campaigns",
-    "Lead Generation", "E-commerce Marketing", "Influencer Marketing",
+    "SEO Optimization","Social Media Marketing","Google Ads","Content Strategy",
+    "Web Design","Email Marketing","Brand Identity","Analytics & Reporting",
+    "PPC Campaigns","Lead Generation","E-commerce Marketing","Influencer Marketing",
   ];
   const doubled = [...items, ...items];
 
   return (
-    <div className="border-y border-[var(--border-light)] bg-[var(--surface)] overflow-hidden py-4">
-      <div className="flex">
-        <div className="flex items-center gap-8 animate-marquee whitespace-nowrap pr-8">
+    <div style={{ borderTop: "1px solid #EAE7FF", borderBottom: "1px solid #EAE7FF", background: "#F8F6FF", padding: "16px 0", overflow: "hidden" }}>
+      <div style={{ display: "flex", overflow: "hidden" }}>
+        <div className="anim-marquee" style={{ display: "flex", alignItems: "center", gap: "32px", whiteSpace: "nowrap", paddingRight: "32px" }}>
           {doubled.map((item, i) => (
-            <span key={i} className="flex items-center gap-8">
-              <span className="text-sm font-medium text-[var(--text-secondary)]">{item}</span>
-              <span className="text-[var(--primary)] text-xs">✦</span>
+            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "32px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 500, color: "#4A4870" }}>{item}</span>
+              <span style={{ color: "#6C47FF", fontSize: "10px" }}>✦</span>
             </span>
           ))}
         </div>

@@ -1,144 +1,134 @@
 import Link from "next/link";
-import { Search, Share2, TrendingUp, Monitor, FileText, Palette, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
-    icon: Search,
+    icon: "🔍",
     title: "Search Engine Optimization",
-    desc: "Rank higher on Google and drive organic traffic that converts. We build long-term authority for your brand.",
-    points: ["Technical SEO Audit", "Keyword Research & Strategy", "Link Building & Authority"],
-    color: "from-blue-500 to-cyan-500",
-    bg: "bg-blue-50",
-    href: "/services#seo",
+    desc: "Rank higher on Google and drive organic traffic that converts. Long-term authority building for your brand.",
+    points: ["Technical SEO Audit", "Keyword Research", "Link Building"],
+    color: "#2563EB", bg: "#EFF6FF",
   },
   {
-    icon: Share2,
+    icon: "📱",
     title: "Social Media Marketing",
-    desc: "Build a loyal community and turn followers into paying customers through strategic content.",
-    points: ["Content Creation & Posting", "Community Management", "Influencer Outreach"],
-    color: "from-pink-500 to-rose-500",
-    bg: "bg-pink-50",
-    href: "/services#social",
+    desc: "Build loyal communities and turn followers into paying customers through strategic content & engagement.",
+    points: ["Content Creation", "Community Management", "Influencer Outreach"],
+    color: "#DB2777", bg: "#FDF2F8",
   },
   {
-    icon: TrendingUp,
+    icon: "📈",
     title: "Pay-Per-Click (PPC)",
-    desc: "Maximize your ad spend with data-driven Google & Meta campaigns that deliver measurable ROI.",
+    desc: "Data-driven Google & Meta campaigns that deliver measurable ROI. Maximum returns on your ad spend.",
     points: ["Google Ads Management", "Meta & Instagram Ads", "Conversion Optimization"],
-    color: "from-[#6C47FF] to-[#A78BFA]",
-    bg: "bg-[var(--primary-light)]",
-    href: "/services#ppc",
+    color: "#6C47FF", bg: "#EEE9FF",
     featured: true,
   },
   {
-    icon: Monitor,
+    icon: "💻",
     title: "Web Design & Development",
-    desc: "Beautiful, fast, and conversion-optimized websites that make your brand stand out and sell more.",
+    desc: "Beautiful, fast, conversion-optimized websites. Your brand stand out and sell more online.",
     points: ["Custom Website Design", "Landing Page Optimization", "E-commerce Solutions"],
-    color: "from-orange-500 to-amber-500",
-    bg: "bg-orange-50",
-    href: "/services#web",
+    color: "#D97706", bg: "#FFFBEB",
   },
   {
-    icon: FileText,
+    icon: "✍️",
     title: "Content Marketing",
     desc: "High-quality content that educates your audience, builds trust, and fuels your marketing funnel.",
-    points: ["Blog & Article Writing", "Video Script Writing", "Email Newsletters"],
-    color: "from-green-500 to-emerald-500",
-    bg: "bg-green-50",
-    href: "/services#content",
+    points: ["Blog & Article Writing", "Video Scripts", "Email Newsletters"],
+    color: "#059669", bg: "#ECFDF5",
   },
   {
-    icon: Palette,
+    icon: "🎨",
     title: "Brand Strategy",
-    desc: "Craft a powerful brand identity that resonates with your audience and creates lasting impressions.",
+    desc: "Craft a powerful brand identity that resonates with your target audience and creates lasting impressions.",
     points: ["Brand Identity Design", "Positioning & Messaging", "Competitive Analysis"],
-    color: "from-purple-500 to-violet-500",
-    bg: "bg-purple-50",
-    href: "/services#brand",
+    color: "#7C3AED", bg: "#F5F3FF",
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="section-pad bg-white" id="services">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="section" style={{ background: "#fff" }} id="services">
+      <div className="container">
         {/* Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--primary-light)] text-[var(--primary)] text-xs font-semibold uppercase tracking-widest mb-4">
-            What We Do
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-black text-[var(--text-primary)] mb-4">
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <span className="tag">What We Do</span>
+          <h2 className="heading-xl" style={{ marginBottom: "16px" }}>
             Services That Drive <span className="gradient-text">Real Results</span>
           </h2>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-lg">
-            Every strategy is custom-built for your brand's unique goals and market position.
+          <p style={{ fontSize: "17px", color: "#6B6A8A", maxWidth: "520px", margin: "0 auto" }}>
+            Every strategy is custom-built for your brand&apos;s unique goals and market position.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className={`group relative rounded-3xl p-8 border transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--shadow-lg)] cursor-pointer ${
-                service.featured
-                  ? "bg-gradient-to-br from-[var(--primary)] to-[#7C5CFF] border-transparent text-white"
-                  : "bg-white border-[var(--border-light)] hover:border-[var(--primary)]"
-              }`}
-            >
-              {service.featured && (
-                <span className="absolute top-5 right-5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold">
-                  Most Popular
-                </span>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="services-grid">
+          {services.map((s) => (
+            <div key={s.title} className="card" style={{
+              padding: "32px",
+              position: "relative",
+              ...(s.featured ? {
+                background: "linear-gradient(145deg, #6C47FF 0%, #7C5CFF 100%)",
+                border: "none",
+                boxShadow: "0 20px 60px rgba(108,71,255,0.35)"
+              } : {})
+            }}>
+              {s.featured && (
+                <span style={{
+                  position: "absolute", top: "16px", right: "16px",
+                  background: "rgba(255,255,255,0.2)", color: "#fff",
+                  padding: "4px 12px", borderRadius: "100px",
+                  fontSize: "11px", fontWeight: 700, letterSpacing: "0.06em"
+                }}>MOST POPULAR</span>
               )}
 
               {/* Icon */}
-              <div className={`w-13 h-13 rounded-2xl flex items-center justify-center mb-6 ${service.featured ? "bg-white/20" : service.bg}`}>
-                <service.icon
-                  size={26}
-                  className={service.featured ? "text-white" : ""}
-                  style={!service.featured ? {} : {}}
-                />
-              </div>
+              <div style={{
+                width: "52px", height: "52px", borderRadius: "14px",
+                background: s.featured ? "rgba(255,255,255,0.2)" : s.bg,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "24px", marginBottom: "20px"
+              }}>{s.icon}</div>
 
-              <h3 className={`text-xl font-bold mb-3 ${service.featured ? "text-white" : "text-[var(--text-primary)]"}`}>
-                {service.title}
+              <h3 style={{ fontSize: "17px", fontWeight: 700, marginBottom: "10px", color: s.featured ? "#fff" : "#0D0B26" }}>
+                {s.title}
               </h3>
-              <p className={`text-sm leading-relaxed mb-5 ${service.featured ? "text-white/80" : "text-[var(--text-secondary)]"}`}>
-                {service.desc}
+              <p style={{ fontSize: "14px", lineHeight: 1.65, color: s.featured ? "rgba(255,255,255,0.8)" : "#6B6A8A", marginBottom: "18px" }}>
+                {s.desc}
               </p>
 
-              <ul className="space-y-2 mb-6">
-                {service.points.map((point) => (
-                  <li key={point} className={`flex items-center gap-2 text-sm ${service.featured ? "text-white/90" : "text-[var(--text-secondary)]"}`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${service.featured ? "bg-white/60" : "bg-[var(--primary)]"}`} />
-                    {point}
+              <ul style={{ listStyle: "none", marginBottom: "22px" }}>
+                {s.points.map((p) => (
+                  <li key={p} style={{ fontSize: "13px", color: s.featured ? "rgba(255,255,255,0.85)" : "#6B6A8A", padding: "4px 0", paddingLeft: "16px", position: "relative" }}>
+                    <span style={{ position: "absolute", left: 0, color: s.featured ? "rgba(255,255,255,0.7)" : s.color }}>→</span>
+                    {p}
                   </li>
                 ))}
               </ul>
 
-              <Link
-                href={service.href}
-                className={`inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all ${
-                  service.featured ? "text-white" : "text-[var(--primary)]"
-                }`}
-              >
-                Learn More <ArrowRight size={15} />
+              <Link href={`/services`} style={{
+                display: "inline-flex", alignItems: "center", gap: "6px",
+                fontSize: "14px", fontWeight: 600, textDecoration: "none",
+                color: s.featured ? "#fff" : s.color
+              }}>
+                Learn More <ArrowRight size={14} />
               </Link>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl border-2 border-[var(--primary)] text-[var(--primary)] font-semibold hover:bg-[var(--primary)] hover:text-white transition-all duration-200"
-          >
+        <div style={{ textAlign: "center", marginTop: "48px" }}>
+          <Link href="/services" className="btn-outline">
             View All Services <ArrowRight size={16} />
           </Link>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2,1fr) !important; } }
+        @media (max-width: 640px) { .services-grid { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }

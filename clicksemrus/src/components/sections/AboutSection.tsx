@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const points = [
   "Custom strategies — no cookie-cutter templates",
@@ -10,90 +10,99 @@ const points = [
 
 export default function AboutSection() {
   return (
-    <section className="section-pad bg-[var(--surface)]" id="about">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Visual Side */}
-          <div className="relative">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--primary)] to-[#7C5CFF] p-10 text-white">
-              <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-white/10 -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-white/10 translate-y-1/2 -translate-x-1/2" />
-              <div className="relative z-10">
-                <div className="text-5xl mb-6">⚡</div>
-                <h3 className="text-3xl font-black mb-3">Clicksemrus</h3>
-                <p className="text-white/80 mb-8 text-lg">Your Digital Growth Partner</p>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { number: "200+", label: "Brands Scaled" },
-                    { number: "5x", label: "Avg. ROI" },
-                    { number: "98%", label: "Retention Rate" },
-                    { number: "24h", label: "Response Time" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="bg-white/15 rounded-2xl p-4">
-                      <div className="text-2xl font-black mb-1">{stat.number}</div>
-                      <div className="text-xs text-white/70">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+    <section className="section" style={{ background: "#F8F6FF" }} id="about">
+      <div className="container">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }} className="about-grid">
+
+          {/* Visual */}
+          <div style={{ position: "relative", minHeight: "460px" }}>
+            {/* Main card */}
+            <div style={{
+              position: "absolute", top: "50%", left: "50%",
+              transform: "translate(-50%, -50%)",
+              background: "linear-gradient(145deg, #6C47FF 0%, #7C5CFF 100%)",
+              borderRadius: "28px", padding: "40px", width: "240px",
+              textAlign: "center", color: "#fff", zIndex: 2,
+              boxShadow: "0 24px 80px rgba(108,71,255,0.35)"
+            }}>
+              <div style={{ fontSize: "48px", marginBottom: "12px" }}>⚡</div>
+              <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "4px" }}>Clicksemrus</h3>
+              <p style={{ fontSize: "13px", opacity: 0.75, marginBottom: "20px" }}>Your Growth Partner</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", justifyContent: "center" }}>
+                {["SEO","PPC","Social","Web"].map((t) => (
+                  <span key={t} style={{ background: "rgba(255,255,255,0.2)", padding: "4px 10px", borderRadius: "100px", fontSize: "11px", fontWeight: 600 }}>{t}</span>
+                ))}
               </div>
             </div>
 
-            {/* Float badges */}
-            <div className="absolute -top-6 -right-6 bg-white rounded-2xl shadow-[var(--shadow-md)] border border-[var(--border-light)] p-4 animate-float">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">🚀</span>
-                <div>
-                  <div className="font-bold text-sm text-[var(--text-primary)]">500% Traffic</div>
-                  <div className="text-xs text-[var(--text-muted)]">Avg. growth in 6 months</div>
-                </div>
+            {/* Float 1 */}
+            <div className="anim-float" style={{
+              position: "absolute", top: "10%", left: "0",
+              background: "#fff", borderRadius: "18px",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.1)", border: "1px solid #EAE7FF",
+              padding: "16px 20px", display: "flex", alignItems: "center", gap: "12px", zIndex: 3
+            }}>
+              <span style={{ fontSize: "28px" }}>🚀</span>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: "18px", color: "#0D0B26" }}>200+</div>
+                <div style={{ fontSize: "11px", color: "#9896B8" }}>Projects Done</div>
               </div>
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-[var(--shadow-md)] border border-[var(--border-light)] p-4" style={{ animation: "float 4s ease-in-out 2s infinite" }}>
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">⭐</span>
-                <div>
-                  <div className="font-bold text-sm text-[var(--text-primary)]">4.9★ Rating</div>
-                  <div className="text-xs text-[var(--text-muted)]">From 200+ clients</div>
-                </div>
+
+            {/* Float 2 */}
+            <div className="anim-float2" style={{
+              position: "absolute", bottom: "10%", right: "0",
+              background: "#fff", borderRadius: "18px",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.1)", border: "1px solid #EAE7FF",
+              padding: "16px 20px", display: "flex", alignItems: "center", gap: "12px", zIndex: 3
+            }}>
+              <span style={{ fontSize: "28px" }}>⭐</span>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: "18px", color: "#0D0B26" }}>4.9★</div>
+                <div style={{ fontSize: "11px", color: "#9896B8" }}>Client Rating</div>
               </div>
             </div>
+
+            {/* Bg decoration */}
+            <div style={{
+              position: "absolute", top: "50%", left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "300px", height: "300px", borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(108,71,255,0.1) 0%, transparent 70%)",
+              zIndex: 1
+            }} />
           </div>
 
-          {/* Content Side */}
+          {/* Content */}
           <div>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--primary-light)] text-[var(--primary)] text-xs font-semibold uppercase tracking-widest mb-5">
-              About Us
-            </span>
-            <h2 className="text-4xl lg:text-5xl font-black text-[var(--text-primary)] leading-tight mb-6">
-              We Don&apos;t Just Market.
-              <br />
+            <span className="tag">About Us</span>
+            <h2 className="heading-xl" style={{ marginBottom: "20px" }}>
+              We Don&apos;t Just Market.<br />
               <span className="gradient-text">We Build Empires.</span>
             </h2>
-            <p className="text-[var(--text-secondary)] text-lg leading-relaxed mb-5">
+            <p style={{ fontSize: "16px", color: "#6B6A8A", lineHeight: 1.75, marginBottom: "16px" }}>
               Clicksemrus is a full-service digital marketing agency founded on one belief — every brand deserves a strategy as unique as its DNA. We combine data, creativity, and technology to deliver growth that matters.
             </p>
-            <p className="text-[var(--text-secondary)] leading-relaxed mb-8">
-              From startups to established businesses, we&apos;ve helped brands across industries multiply their online presence, dominate search rankings, and convert traffic into revenue.
+            <p style={{ fontSize: "16px", color: "#6B6A8A", lineHeight: 1.75, marginBottom: "28px" }}>
+              From startups to established businesses, we&apos;ve helped brands multiply their online presence, dominate search rankings, and convert traffic into revenue.
             </p>
 
-            <div className="space-y-3 mb-10">
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "36px" }}>
               {points.map((point) => (
-                <div key={point} className="flex items-start gap-3">
-                  <CheckCircle2 size={20} className="text-[var(--primary)] mt-0.5 shrink-0" />
-                  <span className="text-[var(--text-secondary)]">{point}</span>
+                <div key={point} style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "15px", color: "#4A4870" }}>
+                  <CheckCircle2 size={18} color="#6C47FF" style={{ flexShrink: 0, marginTop: "2px" }} />
+                  {point}
                 </div>
               ))}
             </div>
 
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[var(--primary)] text-white font-semibold shadow-[var(--shadow-md)] hover:bg-[var(--primary-dark)] hover:-translate-y-0.5 transition-all duration-200"
-            >
+            <Link href="/about" className="btn-primary">
               Learn More About Us <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </div>
+      <style>{`@media(max-width:1024px){.about-grid{grid-template-columns:1fr!important;} .about-grid > div:first-child{display:none;}}`}</style>
     </section>
   );
 }

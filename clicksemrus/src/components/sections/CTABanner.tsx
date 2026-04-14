@@ -3,40 +3,57 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTABanner() {
   return (
-    <section className="section-pad bg-[var(--surface)]">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <div className="relative rounded-3xl bg-gradient-to-br from-[var(--primary)] via-[#7C5CFF] to-[#A855F7] p-12 lg:p-16 overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/10 -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-white/10 translate-y-1/2 -translate-x-1/2" />
+    <section style={{ background: "#F8F6FF", padding: "100px 0" }}>
+      <div className="container">
+        <div style={{
+          background: "linear-gradient(145deg, #6C47FF 0%, #7C5CFF 60%, #9B74FF 100%)",
+          borderRadius: "32px", padding: "72px 48px", textAlign: "center",
+          position: "relative", overflow: "hidden",
+          boxShadow: "0 32px 80px rgba(108,71,255,0.35)"
+        }}>
+          {/* Decoration */}
+          <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "300px", height: "300px", borderRadius: "50%", background: "rgba(255,255,255,0.08)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-60px", left: "-60px", width: "220px", height: "220px", borderRadius: "50%", background: "rgba(255,255,255,0.06)", pointerEvents: "none" }} />
 
-          <div className="relative z-10">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-xs font-semibold uppercase tracking-widest mb-6">
+          <div style={{ position: "relative", zIndex: 1, maxWidth: "640px", margin: "0 auto" }}>
+            <span style={{
+              display: "inline-block", padding: "6px 16px",
+              background: "rgba(255,255,255,0.2)", color: "#fff",
+              borderRadius: "100px", fontSize: "12px", fontWeight: 700,
+              letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "20px"
+            }}>
               Limited Spots Available
             </span>
-            <h2 className="text-3xl lg:text-5xl font-black text-white mb-5">
+            <h2 style={{ fontSize: "clamp(2rem,4.5vw,3.2rem)", fontWeight: 900, color: "#fff", lineHeight: 1.15, marginBottom: "18px", letterSpacing: "-0.02em" }}>
               Ready to 10x Your Digital Growth?
             </h2>
-            <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+            <p style={{ fontSize: "17px", color: "rgba(255,255,255,0.8)", marginBottom: "40px", lineHeight: 1.7 }}>
               Get a FREE 30-minute strategy call and a detailed audit of your current marketing — no strings attached.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-[var(--primary)] font-bold text-base hover:bg-[var(--surface)] hover:-translate-y-1 transition-all duration-200 shadow-lg"
-              >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", flexWrap: "wrap", marginBottom: "28px" }}>
+              <Link href="/contact" style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                padding: "16px 32px", borderRadius: "14px",
+                background: "#fff", color: "#6C47FF",
+                fontWeight: 700, fontSize: "15px", textDecoration: "none",
+                boxShadow: "0 8px 28px rgba(0,0,0,0.15)",
+                transition: "all 0.2s"
+              }}>
                 Claim Your Free Audit <ArrowRight size={18} />
               </Link>
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl border-2 border-white/40 text-white font-semibold hover:bg-white/10 transition-all duration-200"
-              >
+              <Link href="/portfolio" style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                padding: "16px 32px", borderRadius: "14px",
+                border: "2px solid rgba(255,255,255,0.4)", color: "#fff",
+                fontWeight: 600, fontSize: "15px", textDecoration: "none",
+                transition: "all 0.2s"
+              }}>
                 See Our Work
               </Link>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-white/70 text-sm">
+            <div style={{ display: "flex", justifyContent: "center", gap: "32px", flexWrap: "wrap", fontSize: "13px", color: "rgba(255,255,255,0.65)" }}>
               <span>✓ No commitment required</span>
               <span>✓ 100% free</span>
               <span>✓ Response within 24 hours</span>

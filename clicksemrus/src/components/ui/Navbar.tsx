@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Zap, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Zap } from "lucide-react";
 
 const services = [
   { label: "SEO Optimization", href: "/services#seo" },
@@ -16,13 +16,13 @@ const services = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [svcOpen, setSvcOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+    const fn = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
@@ -36,58 +36,73 @@ export default function Navbar() {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white shadow-md py-3" : "bg-white/80 backdrop-blur-md py-4"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <header style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
+      background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.92)",
+      backdropFilter: "blur(20px)",
+      borderBottom: scrolled ? "1px solid #EAE7FF" : "1px solid transparent",
+      boxShadow: scrolled ? "0 2px 20px rgba(108,71,255,0.08)" : "none",
+      transition: "all 0.3s ease",
+      padding: scrolled ? "12px 0" : "16px 0",
+    }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#6C47FF] to-[#FF6B2B] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-            <Zap size={18} className="text-white" />
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
+          <div style={{
+            width: "38px", height: "38px", borderRadius: "12px",
+            background: "linear-gradient(135deg, #6C47FF, #FF6B2B)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 4px 14px rgba(108,71,255,0.3)"
+          }}>
+            <Zap size={18} color="#fff" />
           </div>
-          <span className="text-xl font-bold text-[var(--text-primary)] font-[var(--font-inter)]">
-            Click<span className="text-[var(--primary)]">semrus</span>
+          <span style={{ fontSize: "20px", fontWeight: 800, color: "#0D0B26", letterSpacing: "-0.02em" }}>
+            Click<span style={{ color: "#6C47FF" }}>semrus</span>
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav style={{ display: "flex", alignItems: "center", gap: "4px" }} className="desktop-nav">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                pathname === link.href
-                  ? "text-[var(--primary)] bg-[var(--primary-light)]"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)]"
-              }`}
-            >
+            <Link key={link.href} href={link.href} style={{
+              padding: "8px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 500,
+              textDecoration: "none",
+              color: pathname === link.href ? "#6C47FF" : "#4A4870",
+              background: pathname === link.href ? "#EEE9FF" : "transparent",
+              transition: "all 0.2s"
+            }}>
               {link.label}
             </Link>
           ))}
 
-          {/* Services Dropdown */}
-          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
-            <button
-              className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-1 transition-colors ${
-                pathname === "/services"
-                  ? "text-[var(--primary)] bg-[var(--primary-light)]"
-                  : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)]"
-              }`}
-            >
-              Services
-              <ChevronDown size={14} className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+          {/* Services dropdown */}
+          <div style={{ position: "relative" }}
+            onMouseEnter={() => setSvcOpen(true)}
+            onMouseLeave={() => setSvcOpen(false)}>
+            <button style={{
+              display: "flex", alignItems: "center", gap: "4px",
+              padding: "8px 14px", borderRadius: "10px", fontSize: "14px", fontWeight: 500,
+              background: "none", border: "none", cursor: "pointer",
+              color: pathname === "/services" ? "#6C47FF" : "#4A4870"
+            }}>
+              Services <ChevronDown size={14} style={{ transform: svcOpen ? "rotate(180deg)" : "none", transition: "0.2s" }} />
             </button>
-            {servicesOpen && (
-              <div className="absolute top-full left-0 mt-1 w-60 bg-white rounded-2xl shadow-[var(--shadow-lg)] border border-[var(--border-light)] py-2 z-50">
+            {svcOpen && (
+              <div style={{
+                position: "absolute", top: "calc(100% + 8px)", left: "0",
+                background: "#fff", borderRadius: "16px",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.12)", border: "1px solid #EAE7FF",
+                padding: "8px", minWidth: "240px", zIndex: 100
+              }}>
                 {services.map((s) => (
-                  <Link
-                    key={s.href}
-                    href={s.href}
-                    className="block px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)] transition-colors"
-                  >
+                  <Link key={s.href} href={s.href} style={{
+                    display: "block", padding: "10px 14px", borderRadius: "10px",
+                    fontSize: "14px", color: "#4A4870", textDecoration: "none",
+                    transition: "all 0.15s"
+                  }}
+                  onMouseEnter={e => { (e.target as HTMLElement).style.background = "#F5F2FF"; (e.target as HTMLElement).style.color = "#6C47FF"; }}
+                  onMouseLeave={e => { (e.target as HTMLElement).style.background = "none"; (e.target as HTMLElement).style.color = "#4A4870"; }}>
                     {s.label}
                   </Link>
                 ))}
@@ -96,56 +111,47 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:+911234567890" className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
-            <Phone size={14} />
-            +91 12345 67890
+        {/* Right CTA */}
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }} className="desktop-nav">
+          <a href="tel:+911234567890" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#6B6A8A", textDecoration: "none" }}>
+            <Phone size={14} />+91 12345 67890
           </a>
-          <Link
-            href="/contact"
-            className="px-5 py-2.5 rounded-xl bg-[var(--primary)] text-white text-sm font-semibold hover:bg-[var(--primary-dark)] transition-all shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5"
-          >
+          <Link href="/contact" className="btn-primary" style={{ padding: "10px 20px", fontSize: "14px" }}>
             Free Audit
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="lg:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--surface)]"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        {/* Mobile toggle */}
+        <button onClick={() => setMobileOpen(!mobileOpen)}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: "6px", display: "none" }}
+          className="mobile-nav" aria-label="Menu">
+          {mobileOpen ? <X size={22} color="#0D0B26" /> : <Menu size={22} color="#0D0B26" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-[var(--border-light)] px-6 py-4 space-y-1">
+        <div style={{ background: "#fff", borderTop: "1px solid #EAE7FF", padding: "16px 24px 20px" }}>
           {[...navLinks, { label: "Services", href: "/services" }].map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                pathname === link.href
-                  ? "text-[var(--primary)] bg-[var(--primary-light)]"
-                  : "text-[var(--text-secondary)] hover:bg-[var(--surface)]"
-              }`}
-            >
-              {link.label}
-            </Link>
+            <Link key={link.href} href={link.href} style={{
+              display: "block", padding: "12px 16px", borderRadius: "12px",
+              fontSize: "15px", fontWeight: 500, textDecoration: "none", marginBottom: "4px",
+              color: pathname === link.href ? "#6C47FF" : "#4A4870",
+              background: pathname === link.href ? "#EEE9FF" : "none"
+            }}>{link.label}</Link>
           ))}
-          <div className="pt-3">
-            <Link
-              href="/contact"
-              className="block w-full text-center px-5 py-3 rounded-xl bg-[var(--primary)] text-white text-sm font-semibold"
-            >
-              Get Free Audit
-            </Link>
-          </div>
+          <Link href="/contact" className="btn-primary" style={{ marginTop: "12px", width: "100%", justifyContent: "center" }}>
+            Get Free Audit
+          </Link>
         </div>
       )}
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .desktop-nav { display: none !important; }
+          .mobile-nav { display: flex !important; }
+        }
+      `}</style>
     </header>
   );
 }

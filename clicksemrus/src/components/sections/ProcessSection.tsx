@@ -1,65 +1,79 @@
 const steps = [
   { num: "01", icon: "🎯", title: "Discovery & Audit", desc: "We deep-dive into your brand, competitors, and market to uncover untapped growth opportunities." },
-  { num: "02", icon: "📊", title: "Strategy Development", desc: "We craft a data-backed, custom marketing roadmap aligned with your business goals and budget." },
+  { num: "02", icon: "📊", title: "Strategy Development", desc: "We craft a data-backed, custom marketing roadmap aligned with your business goals." },
   { num: "03", icon: "✏️", title: "Content & Creative", desc: "Our creative team produces high-impact content, ads, and visuals that captivate your audience." },
-  { num: "04", icon: "🚀", title: "Launch & Execute", desc: "Campaigns go live across all chosen channels — optimized from day one for maximum performance." },
+  { num: "04", icon: "🚀", title: "Launch & Execute", desc: "Campaigns go live across all channels — optimized from day one for maximum performance." },
   { num: "05", icon: "📈", title: "Analyse & Scale", desc: "We track every metric, report transparently, and continuously optimize to scale your results." },
 ];
 
 export default function ProcessSection() {
   return (
-    <section className="section-pad bg-white" id="process">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--primary-light)] text-[var(--primary)] text-xs font-semibold uppercase tracking-widest mb-4">
-            How We Work
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-black text-[var(--text-primary)] mb-4">
+    <section className="section" style={{ background: "#F8F6FF" }} id="process">
+      <div className="container">
+        <div style={{ textAlign: "center", marginBottom: "64px" }}>
+          <span className="tag">How We Work</span>
+          <h2 className="heading-xl">
             Our Proven <span className="gradient-text">5-Step Process</span>
           </h2>
-          <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-lg">
+          <p style={{ fontSize: "17px", color: "#6B6A8A", maxWidth: "480px", margin: "16px auto 0" }}>
             A proven framework that delivers consistent results, every time.
           </p>
         </div>
 
-        {/* Desktop Timeline */}
-        <div className="hidden lg:grid grid-cols-5 gap-0 relative">
-          {/* Connector line */}
-          <div className="absolute top-10 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-[var(--primary)] via-[#A78BFA] to-[var(--secondary)]" />
-
-          {steps.map((step, i) => (
-            <div key={step.num} className="flex flex-col items-center text-center px-3 group">
-              {/* Circle */}
-              <div className={`relative w-20 h-20 rounded-2xl flex flex-col items-center justify-center mb-6 z-10 transition-all duration-300 group-hover:-translate-y-2 ${
-                i === 2 ? "bg-[var(--primary)] shadow-[var(--shadow-md)]" : "bg-[var(--surface)] border-2 border-[var(--border)] group-hover:border-[var(--primary)]"
-              }`}>
-                <span className="text-2xl">{step.icon}</span>
-                <span className={`text-xs font-bold ${i === 2 ? "text-white/80" : "text-[var(--primary)]"}`}>{step.num}</span>
+        {/* Desktop */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: "0", position: "relative" }} className="process-desktop">
+          {/* connector line */}
+          <div style={{ position: "absolute", top: "44px", left: "10%", right: "10%", height: "2px", background: "linear-gradient(90deg, #6C47FF, #C840E9, #FF6B2B)" }} />
+          {steps.map((s, i) => (
+            <div key={s.num} style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 12px" }}>
+              <div style={{
+                width: "88px", height: "88px", borderRadius: "20px",
+                background: i === 2 ? "linear-gradient(135deg, #6C47FF, #7C5CFF)" : "#fff",
+                border: i === 2 ? "none" : "2px solid #EAE7FF",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                position: "relative", zIndex: 2, marginBottom: "20px",
+                boxShadow: i === 2 ? "0 12px 40px rgba(108,71,255,0.35)" : "0 4px 16px rgba(0,0,0,0.06)"
+              }}>
+                <span style={{ fontSize: "28px", display: "block" }}>{s.icon}</span>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: i === 2 ? "rgba(255,255,255,0.7)" : "#6C47FF" }}>{s.num}</span>
               </div>
-              <h3 className="font-bold text-[var(--text-primary)] mb-2">{step.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{step.desc}</p>
+              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#0D0B26", marginBottom: "8px" }}>{s.title}</h3>
+              <p style={{ fontSize: "12px", color: "#6B6A8A", lineHeight: 1.6 }}>{s.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Mobile Steps */}
-        <div className="lg:hidden space-y-4">
-          {steps.map((step, i) => (
-            <div key={step.num} className="flex gap-5 p-6 rounded-2xl bg-[var(--surface)] border border-[var(--border-light)]">
-              <div className={`w-14 h-14 shrink-0 rounded-2xl flex flex-col items-center justify-center ${
-                i === 2 ? "bg-[var(--primary)]" : "bg-white border-2 border-[var(--border)]"
-              }`}>
-                <span className="text-xl">{step.icon}</span>
-                <span className={`text-xs font-bold ${i === 2 ? "text-white/80" : "text-[var(--primary)]"}`}>{step.num}</span>
+        {/* Mobile */}
+        <div style={{ display: "none", flexDirection: "column", gap: "12px" }} className="process-mobile">
+          {steps.map((s, i) => (
+            <div key={s.num} style={{
+              display: "flex", gap: "16px", padding: "20px 24px", borderRadius: "16px",
+              background: i === 2 ? "linear-gradient(135deg, #6C47FF, #7C5CFF)" : "#fff",
+              border: i === 2 ? "none" : "1.5px solid #EAE7FF",
+              boxShadow: i === 2 ? "0 12px 40px rgba(108,71,255,0.25)" : "none"
+            }}>
+              <div style={{
+                width: "52px", height: "52px", borderRadius: "14px", flexShrink: 0,
+                background: i === 2 ? "rgba(255,255,255,0.2)" : "#EEE9FF",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"
+              }}>
+                <span style={{ fontSize: "20px" }}>{s.icon}</span>
+                <span style={{ fontSize: "10px", fontWeight: 700, color: i === 2 ? "rgba(255,255,255,0.7)" : "#6C47FF" }}>{s.num}</span>
               </div>
               <div>
-                <h3 className="font-bold text-[var(--text-primary)] mb-1">{step.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)]">{step.desc}</p>
+                <h3 style={{ fontSize: "15px", fontWeight: 700, color: i === 2 ? "#fff" : "#0D0B26", marginBottom: "4px" }}>{s.title}</h3>
+                <p style={{ fontSize: "13px", color: i === 2 ? "rgba(255,255,255,0.75)" : "#6B6A8A" }}>{s.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <style>{`
+        @media(max-width:1024px){
+          .process-desktop{display:none!important;}
+          .process-mobile{display:flex!important;}
+        }
+      `}</style>
     </section>
   );
 }
