@@ -221,8 +221,8 @@ export default function Blog() {
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '32px' }} className="blog-grid">
                 {gridPosts.map(post => (
-                  <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', paddingBottom: '20px' }}>
-                    <div style={{ position: 'relative', cursor: 'pointer' }}
+                  <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', paddingBottom: '20px', textAlign: 'left' }}>
+                    <div style={{ position: 'relative', cursor: 'pointer', textAlign: 'left' }}
                       onMouseEnter={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06)' }}
                       onMouseLeave={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)' }}>
 
@@ -255,12 +255,12 @@ export default function Blog() {
                         textAlign: 'left',
                       }}>
                         {/* title */}
-                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.5, marginBottom: '8px' }}>
+                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.5, marginBottom: '8px', textAlign: 'left' }}>
                           {post.title}
                         </h3>
                         {/* excerpt — 3.5 lines via line-clamp */}
                         <p style={{
-                          fontSize: '13px', color: '#64748B', lineHeight: 1.65, marginBottom: '14px',
+                          fontSize: '13px', color: '#64748B', lineHeight: 1.65, marginBottom: '14px', textAlign: 'left',
                           display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                         }}>
                           {post.excerpt}
@@ -316,6 +316,7 @@ export default function Blog() {
         @media(max-width:580px){.blog-grid{grid-template-columns:1fr!important;}}
         @media(max-width:780px){.featured-card{grid-template-columns:1fr!important;}}
         @media(max-width:780px){.featured-card>div:last-child{min-height:220px!important;}}
+        .card-info, .card-info *{text-align:left!important;}
       `}</style>
     </>
   )
