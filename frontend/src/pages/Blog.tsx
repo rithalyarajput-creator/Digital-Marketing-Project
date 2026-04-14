@@ -246,11 +246,12 @@ export default function Blog() {
                         borderRadius: '14px',
                         padding: '20px 20px 16px',
                         margin: '0 14px',
-                        marginTop: '-32px',           /* pulls up OVER the image */
+                        marginTop: '-32px',
                         position: 'relative',
                         zIndex: 2,
                         boxShadow: '0 6px 24px rgba(0,0,0,0.09)',
                         transition: 'box-shadow 0.22s',
+                        textAlign: 'left',
                       }}>
                         {/* tag + time */}
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
