@@ -1,21 +1,17 @@
 # ⚡ Clicksemrus — Digital Marketing Agency Website
 
-> A professional, modern, and fully responsive digital marketing agency website built with pure HTML, CSS & JavaScript.
+> Professional, full-stack digital marketing agency website built with Next.js 14, PHP, and MySQL.
 
 ---
 
-## 🌐 Live Preview
-_Coming soon — will be hosted on GitHub Pages_
+## 🌐 Tech Stack
 
----
-
-## 🎯 About This Project
-
-**Clicksemrus** is a result-driven digital marketing agency. This website is the official online presence for the brand, designed to be:
-- Professional and visually impressive
-- Fully responsive (mobile, tablet, desktop)
-- Fast loading — no frameworks, no dependencies
-- Deployable from any machine via a single `git clone`
+| Layer | Technology |
+|---|---|
+| **Frontend** | Next.js 14 (App Router) + TypeScript + Tailwind CSS |
+| **Admin Panel** | Next.js (built-in at `/admin`) |
+| **Backend API** | PHP 8 REST API |
+| **Database** | MySQL |
 
 ---
 
@@ -23,63 +19,91 @@ _Coming soon — will be hosted on GitHub Pages_
 
 ```
 Digital-Marketing-Project/
-├── index.html       → Full website HTML (all sections)
-├── style.css        → Complete styling (dark theme + animations)
-├── script.js        → Interactions, typed effect, scroll animations
-└── README.md        → Project documentation
+├── clicksemrus/               ← Next.js Frontend + Admin
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx           Home Page
+│   │   │   ├── about/             About Us
+│   │   │   ├── services/          All Services
+│   │   │   ├── portfolio/         Case Studies
+│   │   │   ├── blog/              Blog Articles
+│   │   │   ├── contact/           Contact Form
+│   │   │   └── admin/             Admin Dashboard
+│   │   └── components/
+│   │       ├── ui/                Navbar, Footer
+│   │       └── sections/          Hero, Services, About, etc.
+│   └── package.json
+│
+├── backend/                   ← PHP + MySQL Backend
+│   ├── config/
+│   │   └── db.php             Database connection
+│   ├── api/
+│   │   ├── contact.php        POST - Save contact form
+│   │   ├── leads.php          GET/PUT/DELETE - Manage leads
+│   │   └── blog.php           CRUD - Blog posts
+│   └── schema.sql             MySQL database schema
+│
+└── README.md
 ```
 
 ---
 
 ## 🚀 How to Run Locally
 
+### Frontend (Next.js)
 ```bash
-# 1. Clone the repo
-git clone https://github.com/rithalyarajput-creator/Digital-Marketing-Project.git
-
-# 2. Open in browser
-# Simply open index.html in any browser — no server needed!
+cd clicksemrus
+npm install
+npm run dev
+# Opens at http://localhost:3000
 ```
 
-Or use VS Code with **Live Server** extension for auto-reload.
+### Backend (PHP + MySQL)
+```bash
+# 1. Import database schema
+mysql -u root -p < backend/schema.sql
+
+# 2. Update credentials in backend/config/db.php
+
+# 3. Run with PHP built-in server
+cd backend
+php -S localhost:8000
+# API available at http://localhost:8000/api/
+```
 
 ---
 
-## ✨ Website Sections
+## 📄 Website Pages
 
-| Section | Description |
-|---|---|
-| **Navbar** | Sticky, transparent → solid on scroll, mobile hamburger menu |
-| **Hero** | Full-screen hero with typed text animation, stats counter |
-| **Marquee** | Scrolling services ticker |
-| **Services** | 6 service cards (SEO, Social Media, PPC, Web Design, Content, Brand) |
-| **About** | Brand story with floating cards animation |
-| **Process** | 5-step workflow timeline |
-| **Results** | Animated count-up statistics |
-| **Testimonials** | 3 client review cards |
-| **CTA Banner** | Free audit call-to-action |
-| **Contact** | Contact form + details |
-| **Footer** | Full footer with links and social media |
+| Page | URL | Description |
+|---|---|---|
+| Home | `/` | Hero, Services, About, Process, Stats, Testimonials |
+| About | `/about` | Story, Values, Team |
+| Services | `/services` | All 6 services in detail |
+| Portfolio | `/portfolio` | 6 case studies with results |
+| Blog | `/blog` | Articles and insights |
+| Contact | `/contact` | Contact form |
+| Admin | `/admin` | Dashboard, Leads, Blog Manager |
 
 ---
 
 ## 🎨 Design System
 
-- **Theme:** Dark mode (premium/modern)
-- **Primary Font:** Inter (body text)
-- **Display Font:** Space Grotesk (headings)
-- **Accent Color:** Electric Purple `#6450ff`
-- **Gradient:** Purple → Violet → Cyan
-- **Animations:** Scroll reveal, count-up, typed text, floating cards
+- **Theme:** Light/Professional (white + purple gradient)
+- **Primary Color:** `#6C47FF` (Electric Purple)
+- **Font:** Inter + Space Grotesk
+- **Style:** Clean, minimal, conversion-focused
 
 ---
 
-## 📱 Responsive
+## 🗄️ Database Tables
 
-- ✅ Desktop (1200px+)
-- ✅ Laptop (1024px)
-- ✅ Tablet (768px)
-- ✅ Mobile (480px and below)
+| Table | Purpose |
+|---|---|
+| `leads` | Contact form submissions |
+| `blog_posts` | Blog articles |
+| `admin_users` | Admin login accounts |
+| `subscribers` | Email newsletter |
 
 ---
 
@@ -87,16 +111,18 @@ Or use VS Code with **Live Server** extension for auto-reload.
 
 | Date | Update |
 |---|---|
-| 2026-04-14 | Initial website build — all sections complete |
+| 2026-04-14 | Complete website rebuild — Next.js + PHP + MySQL |
+| 2026-04-14 | Initial HTML prototype (replaced) |
 
 ---
 
-## 📞 Contact
+## 📞 Brand Info
 
 **Brand:** Clicksemrus  
 **Email:** hello@clicksemrus.com  
-**Phone:** +91 12345 67890
+**Phone:** +91 12345 67890  
+**Type:** Digital Marketing Agency
 
 ---
 
-_Built with love for Clicksemrus Digital Marketing Agency_
+_Built for Clicksemrus — Result-Driven Digital Marketing Agency_
