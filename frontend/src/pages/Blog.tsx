@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Clock, Search, TrendingUp, Globe, Smartphone, PenLine, Tag, Zap, ChevronRight } from 'lucide-react'
+// Clock still used in featured post
 
 const categories = ['All', 'SEO', 'PPC', 'Social Media', 'Web Design', 'Content', 'Brand']
 
@@ -222,8 +223,8 @@ export default function Blog() {
                 {gridPosts.map(post => (
                   <Link key={post.slug} to={`/blog/${post.slug}`} style={{ textDecoration: 'none', display: 'block', paddingBottom: '20px' }}>
                     <div style={{ position: 'relative', cursor: 'pointer' }}
-                      onMouseEnter={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 12px 40px rgba(0,0,0,0.14)' }}
-                      onMouseLeave={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 6px 24px rgba(0,0,0,0.09)' }}>
+                      onMouseEnter={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06)' }}
+                      onMouseLeave={e => { const info = (e.currentTarget as HTMLElement).querySelector('.card-info') as HTMLElement; if (info) info.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)' }}>
 
                       {/* ── ROUNDED IMAGE ── */}
                       <div style={{ borderRadius: '18px', height: '210px', background: post.imgBg, overflow: 'hidden', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
@@ -240,43 +241,34 @@ export default function Blog() {
                         </span>
                       </div>
 
-                      {/* ── FLOATING INFO BOX — overlaps image from bottom ── */}
+                      {/* ── FLOATING INFO BOX ── */}
                       <div className="card-info" style={{
                         background: '#fff',
                         borderRadius: '14px',
-                        padding: '20px 20px 16px',
+                        padding: '18px 20px 16px',
                         margin: '0 14px',
                         marginTop: '-32px',
                         position: 'relative',
                         zIndex: 2,
-                        boxShadow: '0 6px 24px rgba(0,0,0,0.09)',
-                        transition: 'box-shadow 0.22s',
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)',
+                        transition: 'box-shadow 0.25s',
                         textAlign: 'left',
                       }}>
-                        {/* tag + time */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                          <span style={{ background: post.tagBg, color: post.tagColor, fontSize: '10px', fontWeight: 800, padding: '3px 10px', borderRadius: '100px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                            {post.category}
-                          </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#94A3B8' }}>
-                            <Clock size={10} /> {post.readTime}
-                          </span>
-                        </div>
                         {/* title */}
-                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.45, marginBottom: '8px' }}>
+                        <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#0F172A', lineHeight: 1.5, marginBottom: '8px' }}>
                           {post.title}
                         </h3>
-                        {/* excerpt */}
-                        <p style={{ fontSize: '12px', color: '#64748B', lineHeight: 1.65, marginBottom: '12px' }}>
-                          {post.excerpt.slice(0, 85)}…
+                        {/* excerpt — 3.5 lines via line-clamp */}
+                        <p style={{
+                          fontSize: '13px', color: '#64748B', lineHeight: 1.65, marginBottom: '14px',
+                          display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                        }}>
+                          {post.excerpt}
                         </p>
-                        {/* bottom row */}
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '10px', borderTop: '1px solid #F1F5F9' }}>
-                          <span style={{ fontSize: '11px', color: '#CBD5E1' }}>{post.date}</span>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '13px', fontWeight: 700, color: '#F97316' }}>
-                            Read More <ArrowRight size={13} />
-                          </span>
-                        </div>
+                        {/* read more */}
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: '13px', fontWeight: 700, color: '#F97316' }}>
+                          Read More <ArrowRight size={13} />
+                        </span>
                       </div>
 
                     </div>
