@@ -12,15 +12,8 @@ const navLinks = [
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => { setMenuOpen(false) }, [location.pathname])
 
@@ -28,66 +21,77 @@ export default function Navbar() {
     <>
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        background: scrolled ? 'rgba(255,255,255,0.95)' : '#fff',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: '1px solid #F1F5F9',
-        boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.07)' : 'none',
-        transition: 'all 0.3s',
+        background: '#0F172A',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 2px 24px rgba(0,0,0,0.3)',
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '68px' }}>
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'linear-gradient(135deg,#1A56DB,#3B74E8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '9px', background: 'linear-gradient(135deg,#F97316,#EA580C)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap size={18} color="#fff" fill="#fff" />
             </div>
-            <span style={{ fontSize: '19px', fontWeight: 900, letterSpacing: '-0.02em', color: '#0F172A' }}>
-              Click<span style={{ color: '#1A56DB' }}>semrus</span>
+            <span style={{ fontSize: '19px', fontWeight: 900, letterSpacing: '-0.02em', color: '#fff' }}>
+              Click<span style={{ color: '#F97316' }}>semrus</span>
             </span>
           </Link>
 
           {/* Desktop links */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="desktop-nav">
-            {navLinks.map(l => (
-              <Link key={l.href} to={l.href}
-                className={`nav-link${location.pathname === l.href ? ' active' : ''}`}>
-                {l.label}
-              </Link>
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} className="desktop-nav">
+            {navLinks.map(l => {
+              const isActive = location.pathname === l.href
+              return (
+                <Link key={l.href} to={l.href} style={{
+                  fontSize: '14px', fontWeight: 600, padding: '8px 14px', borderRadius: '8px',
+                  color: isActive ? '#F97316' : 'rgba(255,255,255,0.75)',
+                  textDecoration: 'none', transition: 'all 0.15s',
+                  background: isActive ? 'rgba(249,115,22,0.1)' : 'transparent',
+                }}
+                  onMouseEnter={e => { if (!isActive)(e.currentTarget as HTMLElement).style.color = '#fff' }}
+                  onMouseLeave={e => { if (!isActive)(e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.75)' }}>
+                  {l.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* CTA + burger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Link to="/contact" className="btn btn-blue" style={{ padding: '10px 22px', fontSize: '14px' }} >
-              Get Free Audit
+            <Link to="/contact" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '7px',
+              padding: '9px 20px', borderRadius: '9px', fontSize: '13px', fontWeight: 700,
+              background: '#F97316', color: '#fff', textDecoration: 'none',
+              boxShadow: '0 4px 16px rgba(249,115,22,0.35)', transition: 'all 0.2s',
+            }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = '#EA580C'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = '#F97316'}>
+              Free Audit
             </Link>
             <button
               onClick={() => setMenuOpen(v => !v)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', display: 'none', color: '#0F172A' }}
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '8px', cursor: 'pointer', padding: '7px', display: 'none', color: '#fff', lineHeight: 0 }}
               className="burger-btn"
-              aria-label="Menu"
-            >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              aria-label="Menu">
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div style={{ background: '#fff', borderTop: '1px solid #F1F5F9', padding: '16px 24px 20px' }}>
+          <div style={{ background: '#1E293B', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px 18px' }}>
             {navLinks.map(l => (
-              <Link key={l.href} to={l.href}
-                style={{ display: 'block', padding: '11px 0', fontWeight: 600, fontSize: '15px', color: location.pathname === l.href ? '#1A56DB' : '#475569', textDecoration: 'none', borderBottom: '1px solid #F8FAFC' }}>
-                {l.label}
-              </Link>
+              <Link key={l.href} to={l.href} style={{
+                display: 'block', padding: '11px 12px', fontWeight: 600, fontSize: '15px',
+                color: location.pathname === l.href ? '#F97316' : 'rgba(255,255,255,0.8)',
+                textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.06)', borderRadius: '6px',
+              }}>{l.label}</Link>
             ))}
           </div>
         )}
       </nav>
-      <div style={{ height: '70px' }} />
-
-      <style>{`
-        @media(max-width:900px){ .desktop-nav{display:none!important;} .burger-btn{display:block!important;} }
-      `}</style>
+      <div style={{ height: '68px' }} />
+      <style>{`@media(max-width:900px){.desktop-nav{display:none!important;}.burger-btn{display:block!important;}}`}</style>
     </>
   )
 }

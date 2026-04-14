@@ -97,7 +97,10 @@ export default function Footer() {
               </div>
             </div>
             <div style={{ background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: '10px', padding: '10px 14px' }}>
-              <p style={{ fontSize: '12px', color: '#F59E0B', margin: 0, fontWeight: 600 }}>Mon–Sat: 10AM – 6PM IST</p>
+              <p style={{ fontSize: '12px', color: '#F59E0B', margin: 0, fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Mon–Sat: 10AM – 6PM IST
+              </p>
             </div>
           </div>
         </div>

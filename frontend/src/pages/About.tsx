@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle2, Award, Users, TrendingUp, Globe } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Award, Users, TrendingUp, Globe, Target, BarChart2, Handshake, Lightbulb, Zap } from 'lucide-react'
 import CTABanner from '../components/sections/CTABanner'
 
 const values = [
-  { icon: '🎯', title: 'Results First', desc: 'Every strategy, every campaign, every decision is driven by one goal — your measurable growth.' },
-  { icon: '🔬', title: 'Data Driven', desc: 'We let numbers guide us. No guesswork, no assumptions — just insights backed by real analytics.' },
-  { icon: '🤝', title: 'True Partnership', desc: 'Your success is our success. We work as an extension of your team, not just a vendor.' },
-  { icon: '💡', title: 'Always Innovating', desc: 'Digital marketing evolves fast. We stay ahead of every algorithm, trend, and platform change.' },
+  { Icon: Target, title: 'Results First', desc: 'Every strategy, every campaign, every decision is driven by one goal — your measurable growth.', color: '#1A56DB', bg: '#EBF2FF' },
+  { Icon: BarChart2, title: 'Data Driven', desc: 'We let numbers guide us. No guesswork, no assumptions — just insights backed by real analytics.', color: '#F59E0B', bg: '#FEF3C7' },
+  { Icon: Handshake, title: 'True Partnership', desc: 'Your success is our success. We work as an extension of your team, not just a vendor.', color: '#059669', bg: '#D1FAE5' },
+  { Icon: Lightbulb, title: 'Always Innovating', desc: 'Digital marketing evolves fast. We stay ahead of every algorithm, trend, and platform change.', color: '#7C3AED', bg: '#EDE9FE' },
 ]
 
 const team = [
@@ -41,13 +41,15 @@ export default function About() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px', textAlign: 'center' }} className="about-stats">
             {[
-              { icon: <Award size={28} color="#1A56DB" />, val: '200+', label: 'Brands Scaled' },
-              { icon: <Users size={28} color="#F59E0B" />, val: '98%', label: 'Retention Rate' },
-              { icon: <TrendingUp size={28} color="#059669" />, val: '5x', label: 'Avg ROAS' },
-              { icon: <Globe size={28} color="#7C3AED" />, val: '15+', label: 'Countries Served' },
+              { Icon: Award, val: '200+', label: 'Brands Scaled', color: '#1A56DB', bg: '#EBF2FF' },
+              { Icon: Users, val: '98%', label: 'Retention Rate', color: '#F59E0B', bg: '#FEF3C7' },
+              { Icon: TrendingUp, val: '5x', label: 'Avg ROAS', color: '#059669', bg: '#D1FAE5' },
+              { Icon: Globe, val: '15+', label: 'Countries Served', color: '#7C3AED', bg: '#EDE9FE' },
             ].map(s => (
               <div key={s.label} style={{ background: '#fff', borderRadius: '16px', padding: '28px 16px', border: '1.5px solid #FDE68A' }}>
-                <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'center' }}>{s.icon}</div>
+                <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: s.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+                  <s.Icon size={22} color={s.color} />
+                </div>
                 <div style={{ fontSize: '2.2rem', fontWeight: 900, color: '#0F172A', marginBottom: '4px' }}>{s.val}</div>
                 <p style={{ fontSize: '13px', color: '#64748B', fontWeight: 600 }}>{s.label}</p>
               </div>
@@ -72,7 +74,7 @@ export default function About() {
                 We set out to change that. By combining deep analytical thinking with creative execution, we built a framework that consistently delivers 5x–10x returns for our clients.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {['Founded in 2020 with a team of 3','Grown to 25+ specialists across all channels','Served clients in 15+ countries','₹50 Cr+ in tracked client revenue generated'].map(p => (
+                {['Founded in 2020 with a team of 3', 'Grown to 25+ specialists across all channels', 'Served clients in 15+ countries', '₹50 Cr+ in tracked client revenue generated'].map(p => (
                   <div key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: '9px' }}>
                     <CheckCircle2 size={16} color="#1A56DB" style={{ flexShrink: 0, marginTop: '2px' }} />
                     <span style={{ fontSize: '14px', color: '#475569' }}>{p}</span>
@@ -81,8 +83,10 @@ export default function About() {
               </div>
             </div>
             <div style={{ background: 'linear-gradient(145deg,#EBF2FF,#F0F6FF)', borderRadius: '24px', padding: '48px', textAlign: 'center' }}>
-              <div style={{ fontSize: '64px', marginBottom: '16px' }}>⚡</div>
-              <h3 style={{ fontSize: '22px', fontWeight: 900, color: '#1A56DB', marginBottom: '8px' }}>Our Mission</h3>
+              <div style={{ width: '64px', height: '64px', borderRadius: '18px', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>
+                <Zap size={30} color="#fff" fill="#fff" />
+              </div>
+              <h3 style={{ fontSize: '22px', fontWeight: 900, color: '#1A56DB', marginBottom: '10px' }}>Our Mission</h3>
               <p style={{ fontSize: '15px', color: '#475569', lineHeight: 1.8 }}>
                 To be the growth partner that every ambitious brand deserves — one that combines enterprise-level strategy with startup-level hustle.
               </p>
@@ -103,7 +107,9 @@ export default function About() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '20px' }} className="vals-grid">
             {values.map(v => (
               <div key={v.title} className="card-base" style={{ background: '#fff', borderRadius: '18px', padding: '28px 22px', border: '1.5px solid #E2E8F0', textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', marginBottom: '12px' }}>{v.icon}</div>
+                <div style={{ width: '50px', height: '50px', borderRadius: '13px', background: v.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px' }}>
+                  <v.Icon size={22} color={v.color} />
+                </div>
                 <h4 style={{ fontWeight: 800, fontSize: '15px', color: '#0F172A', marginBottom: '8px' }}>{v.title}</h4>
                 <p style={{ fontSize: '13px', color: '#64748B', lineHeight: 1.65 }}>{v.desc}</p>
               </div>
@@ -124,7 +130,7 @@ export default function About() {
             <div className="divider divider-center" />
             <h2 className="h2" style={{ marginTop: '18px' }}>Meet the <span className="gradient-text">Experts</span></h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '22px', justifyContent: 'center' }} className="team-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '22px' }} className="team-grid">
             {team.map(m => (
               <div key={m.name} className="card-base" style={{ background: '#F8FAFF', borderRadius: '20px', padding: '32px 20px', textAlign: 'center', border: '1.5px solid #E2E8F0' }}>
                 <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: m.color, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 800, fontSize: '22px', margin: '0 auto 16px' }}>

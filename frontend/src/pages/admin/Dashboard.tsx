@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LayoutDashboard, Users, FileText, MessageSquare, BarChart2, Settings, LogOut, Zap, TrendingUp, Eye, CheckCircle2 } from 'lucide-react'
+import { LayoutDashboard, Users, FileText, MessageSquare, BarChart2, Settings, LogOut, Zap, TrendingUp, Eye, CheckCircle2, Wrench } from 'lucide-react'
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -20,8 +20,8 @@ const leads = [
 
 const statusColors: Record<string, { bg: string; color: string }> = {
   New: { bg: '#EBF2FF', color: '#1A56DB' },
-  Contacted: { bg: '#FFF8F0', color: '#D97706' },
-  Converted: { bg: '#F0FDF4', color: '#059669' },
+  Contacted: { bg: '#FEF3C7', color: '#D97706' },
+  Converted: { bg: '#D1FAE5', color: '#059669' },
 }
 
 export default function AdminDashboard() {
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
       }} className="admin-sidebar">
         <div style={{ padding: '24px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg,#1A56DB,#3B74E8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'linear-gradient(135deg,#F97316,#EA580C)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap size={18} color="#fff" fill="#fff" />
             </div>
             <div>
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
             const isActive = active === item.id
             return (
               <button key={item.id} onClick={() => setActive(item.id)}
-                style={{ display: 'flex', alignItems: 'center', gap: '11px', width: '100%', padding: '11px 14px', borderRadius: '10px', background: isActive ? 'rgba(26,86,219,0.2)' : 'transparent', color: isActive ? '#60A5FA' : '#94A3B8', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: isActive ? 700 : 500, marginBottom: '2px', transition: 'all 0.15s', textAlign: 'left' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: '11px', width: '100%', padding: '11px 14px', borderRadius: '10px', background: isActive ? 'rgba(249,115,22,0.15)' : 'transparent', color: isActive ? '#F97316' : '#94A3B8', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: isActive ? 700 : 500, marginBottom: '2px', transition: 'all 0.15s', textAlign: 'left' }}>
                 <Icon size={17} />
                 {item.label}
               </button>
@@ -71,12 +71,11 @@ export default function AdminDashboard() {
 
       {/* Main */}
       <div style={{ flex: 1, marginLeft: '240px', minHeight: '100vh' }} className="admin-main">
-        {/* Top bar */}
         <header style={{ background: '#fff', borderBottom: '1px solid #E2E8F0', padding: '0 28px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <h1 style={{ fontSize: '18px', fontWeight: 800, color: '#0F172A', textTransform: 'capitalize' }}>{active}</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <span style={{ fontSize: '13px', color: '#94A3B8' }}>Admin</span>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '13px' }}>A</div>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#F97316', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '13px' }}>A</div>
           </div>
         </header>
 
@@ -85,7 +84,9 @@ export default function AdminDashboard() {
           {active === 'leads' && <LeadsContent />}
           {active !== 'dashboard' && active !== 'leads' && (
             <div style={{ background: '#fff', borderRadius: '16px', padding: '48px', textAlign: 'center', border: '1.5px solid #E2E8F0' }}>
-              <div style={{ fontSize: '48px', marginBottom: '12px' }}>🚧</div>
+              <div style={{ width: '60px', height: '60px', borderRadius: '16px', background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                <Wrench size={26} color="#94A3B8" />
+              </div>
               <h3 style={{ fontWeight: 800, color: '#0F172A', marginBottom: '8px' }}>Coming Soon</h3>
               <p style={{ color: '#64748B' }}>This section is under development.</p>
             </div>
@@ -94,13 +95,8 @@ export default function AdminDashboard() {
       </div>
 
       <style>{`
-        @media(max-width:900px){
-          .admin-sidebar{left:0!important;position:fixed!important;}
-          .admin-main{margin-left:0!important;}
-        }
-        @media(min-width:901px){
-          .admin-sidebar{left:0!important;}
-        }
+        @media(min-width:901px){.admin-sidebar{left:0!important;}}
+        @media(max-width:900px){.admin-main{margin-left:0!important;}}
       `}</style>
     </div>
   )
@@ -108,10 +104,10 @@ export default function AdminDashboard() {
 
 function DashboardContent() {
   const cards = [
-    { label: 'Total Leads', value: '47', change: '+12 this week', icon: <Users size={22} color="#1A56DB" />, bg: '#EBF2FF' },
-    { label: 'Conversions', value: '12', change: '+3 this week', icon: <CheckCircle2 size={22} color="#059669" />, bg: '#F0FDF4' },
-    { label: 'Page Views', value: '8.2K', change: '+18% this month', icon: <Eye size={22} color="#7C3AED" />, bg: '#F5F3FF' },
-    { label: 'Revenue Pipeline', value: '₹4.8L', change: 'Estimated', icon: <TrendingUp size={22} color="#F59E0B" />, bg: '#FFF8F0' },
+    { label: 'Total Leads', value: '47', change: '+12 this week', Icon: Users, color: '#1A56DB', bg: '#EBF2FF' },
+    { label: 'Conversions', value: '12', change: '+3 this week', Icon: CheckCircle2, color: '#059669', bg: '#D1FAE5' },
+    { label: 'Page Views', value: '8.2K', change: '+18% this month', Icon: Eye, color: '#7C3AED', bg: '#EDE9FE' },
+    { label: 'Revenue Pipeline', value: '₹4.8L', change: 'Estimated', Icon: TrendingUp, color: '#F97316', bg: '#FEF3C7' },
   ]
   return (
     <div>
@@ -120,7 +116,9 @@ function DashboardContent() {
           <div key={c.label} style={{ background: '#fff', borderRadius: '16px', padding: '24px', border: '1.5px solid #E2E8F0' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
               <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748B' }}>{c.label}</span>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: c.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{c.icon}</div>
+              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: c.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <c.Icon size={20} color={c.color} />
+              </div>
             </div>
             <div style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '4px' }}>{c.value}</div>
             <div style={{ fontSize: '12px', color: '#94A3B8' }}>{c.change}</div>
@@ -141,7 +139,7 @@ function DashboardContent() {
 function LeadsContent() {
   return (
     <div style={{ background: '#fff', borderRadius: '16px', border: '1.5px solid #E2E8F0', overflow: 'hidden' }}>
-      <div style={{ padding: '20px 24px', borderBottom: '1px solid #F1F5F9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '20px 24px', borderBottom: '1px solid #F1F5F9' }}>
         <h3 style={{ fontWeight: 800, fontSize: '15px', color: '#0F172A' }}>All Leads ({leads.length})</h3>
       </div>
       <LeadsTable />
@@ -155,7 +153,7 @@ function LeadsTable() {
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
         <thead>
           <tr style={{ background: '#F8FAFF' }}>
-            {['Name','Email','Service','Status','Date'].map(h => (
+            {['Name', 'Email', 'Service', 'Status', 'Date'].map(h => (
               <th key={h} style={{ padding: '12px 20px', textAlign: 'left', fontWeight: 700, fontSize: '12px', color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{h}</th>
             ))}
           </tr>
